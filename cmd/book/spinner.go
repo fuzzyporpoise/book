@@ -6,9 +6,9 @@ import (
 
 	"charm.land/huh/v2/spinner"
 
-	"github.com/polymorcodeus/book/pkg/book"
-	"github.com/polymorcodeus/book/pkg/catalog"
-	"github.com/polymorcodeus/book/pkg/web"
+	"go.fuzzyporpoise.dev/book/pkg/book"
+	"go.fuzzyporpoise.dev/book/pkg/catalog"
+	"go.fuzzyporpoise.dev/book/pkg/web"
 )
 
 // loadCatalog loads shelves with an optional spinner when running interactively.

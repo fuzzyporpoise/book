@@ -119,7 +119,7 @@ tidy:
 ## check-deps: Assert pkg/ packages stay free of TUI/CLI dependencies
 check-deps:
 	@echo "$(BLUE)Checking pkg/ dependency graph...$(NC)"
-	@if go list -deps ./pkg/... | grep -E '^(charm\.land/(bubbletea|huh|lipgloss)|github\.com/urfave/|github\.com/polymorcodeus/book/internal)'; then \
+	@if go list -deps ./pkg/... | grep -E '^(charm\.land/(bubbletea|huh|lipgloss)|github\.com/urfave/|go\.fuzzyporpoise\.dev/book/internal)'; then \
 		echo "$(RED)forbidden dependency in pkg/ graph$(NC)"; \
 		exit 1; \
 	fi

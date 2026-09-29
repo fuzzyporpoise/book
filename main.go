@@ -5,7 +5,7 @@ import (
 	_ "embed"
 	"strings"
 
-	cmd "github.com/polymorcodeus/book/cmd/book"
+	cmd "go.fuzzyporpoise.dev/book/cmd/book"
 )
 
 //go:embed VERSION

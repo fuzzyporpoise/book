@@ -6,7 +6,7 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/polymorcodeus/book/pkg/book"
+	"go.fuzzyporpoise.dev/book/pkg/book"
 )
 
 const v1Fixture = `shelf_name = "work"

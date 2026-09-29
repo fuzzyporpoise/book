@@ -10,16 +10,16 @@ import (
 	"path/filepath"
 
 	tea "charm.land/bubbletea/v2"
-	"github.com/polymorcodeus/gofiglet"
 	altsrc "github.com/urfave/cli-altsrc/v3"
 	alttoml "github.com/urfave/cli-altsrc/v3/toml"
 	validation "github.com/urfave/cli-validation"
 	"github.com/urfave/cli/v3"
+	"go.fuzzyporpoise.dev/gofiglet"
 
-	"github.com/polymorcodeus/book/internal/model"
-	"github.com/polymorcodeus/book/internal/theme"
-	"github.com/polymorcodeus/book/pkg/book"
-	"github.com/polymorcodeus/book/pkg/catalog"
+	"go.fuzzyporpoise.dev/book/internal/model"
+	"go.fuzzyporpoise.dev/book/internal/theme"
+	"go.fuzzyporpoise.dev/book/pkg/book"
+	"go.fuzzyporpoise.dev/book/pkg/catalog"
 )
 
 var (

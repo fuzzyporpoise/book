@@ -1,4 +1,4 @@
-module github.com/polymorcodeus/book
+module go.fuzzyporpoise.dev/book
 
 go 1.26.4
 
@@ -8,10 +8,10 @@ require (
 	charm.land/lipgloss/v2 v2.0.6
 	github.com/BurntSushi/toml v1.6.0
 	github.com/PuerkitoBio/goquery v1.13.0
-	github.com/polymorcodeus/gofiglet v0.3.0
 	github.com/urfave/cli-altsrc/v3 v3.1.0
 	github.com/urfave/cli-validation v0.0.0-20230629031421-92802a7fd6e9
 	github.com/urfave/cli/v3 v3.11.0
+	go.fuzzyporpoise.dev/gofiglet v0.4.0
 	modernc.org/sqlite v1.58.0
 )
 

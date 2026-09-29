@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/polymorcodeus/book/pkg/book"
-	"github.com/polymorcodeus/book/pkg/catalog"
+	"go.fuzzyporpoise.dev/book/pkg/book"
+	"go.fuzzyporpoise.dev/book/pkg/catalog"
 )
 
 // gc purges soft-deleted marks older than retentionDays from the shelf TOML
