@@ -7,6 +7,7 @@ import (
 	"charm.land/lipgloss/v2"
 
 	"go.fuzzyporpoise.dev/book/pkg/book"
+	"go.fuzzyporpoise.dev/tint"
 )
 
 // plainStyles returns Styles with no color or spacing so rendered output is a
@@ -33,7 +34,7 @@ func TestRenderViewSections(t *testing.T) {
 
 	want := "To add mark:\nThe Go Programming Language\n\n" +
 		"With URL:\nhttps://go.dev\n\n" +
-		"With tags:\n" + listBullet + " lang\n" + listBullet + " official"
+		"With tags:\n" + tint.DefaultListBullet + " lang\n" + tint.DefaultListBullet + " official"
 	if got != want {
 		t.Errorf("renderView() = %q, want %q", got, want)
 	}
@@ -46,7 +47,7 @@ func TestRenderViewSkipsEmptySections(t *testing.T) {
 	if strings.Contains(got, "To add") {
 		t.Errorf("renderView() rendered an unset section: %q", got)
 	}
-	if want := "Shelves:\n" + listBullet + " archive"; got != want {
+	if want := "Shelves:\n" + tint.DefaultListBullet + " archive"; got != want {
 		t.Errorf("renderView() = %q, want %q", got, want)
 	}
 }

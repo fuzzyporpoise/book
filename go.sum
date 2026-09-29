@@ -90,6 +90,8 @@ github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e h1:JVG44RsyaB9T2KIHavM
 github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e/go.mod h1:RbqR21r5mrJuqunuUZ/Dhy/avygyECGrLceyNeo4LiM=
 go.fuzzyporpoise.dev/gofiglet v0.4.0 h1:j0c2N8CPO2XEIRF202qflug7QXXQdfSWeU9CtgArX5o=
 go.fuzzyporpoise.dev/gofiglet v0.4.0/go.mod h1:FioPEYU7K0IPppOhRhMowcFTgur7gFkqa3ezndMnS9w=
+go.fuzzyporpoise.dev/tint v0.3.0 h1:k2cjucTTnBgxTf2i268B4q4W4sqFq7EmP0w5CCKFkS4=
+go.fuzzyporpoise.dev/tint v0.3.0/go.mod h1:7etbFXB/Z1SP6SRhiIaZxyy4hnvPEBPk+ji1nZBdSWE=
 golang.org/x/exp v0.0.0-20260212183809-81e46e3db34a h1:ovFr6Z0MNmU7nH8VaX5xqw+05ST2uO1exVfZPVqRC5o=
 golang.org/x/exp v0.0.0-20260212183809-81e46e3db34a/go.mod h1:K79w1Vqn7PoiZn+TkNpx3BUWUQksGO3JcVX6qIjytmA=
 golang.org/x/mod v0.38.0 h1:MECBjubtXD7yj4HrhIUcywNaGeNVUdfVnxmPajOk4yk=

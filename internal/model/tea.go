@@ -10,6 +10,7 @@ import (
 	"charm.land/lipgloss/v2"
 	"go.fuzzyporpoise.dev/book/internal/theme"
 	"go.fuzzyporpoise.dev/book/pkg/book"
+	"go.fuzzyporpoise.dev/tint"
 )
 
 const maxWidth = 120
@@ -215,16 +216,6 @@ func lipglossDimmer(style lipgloss.Style, title string, dim string) string {
 	return style.Render(title) + "\n" + dim + "\n\n"
 }
 
-const listBullet string = "󱥸" // "nf-md-dots_circle"
-
-func lipglossList(gloss lipgloss.Style, l []string) string {
-	parts := make([]string, len(l))
-	for i, s := range l {
-		parts[i] = gloss.Render(listBullet, s)
-	}
-	return strings.Join(parts, "\n")
-}
-
 // viewData is the presentation data a completed TUI screen renders. Each screen
 // builds it from the domain entities it already holds, so the renderer stays a
 // dumb formatter and the meaning of each field is decided per screen rather
@@ -269,7 +260,7 @@ func renderView(styles *Styles, tmpl book.ViewTemplate, data viewData) string {
 	}
 
 	if tmpl.ListTitle != "" && len(data.List) > 0 {
-		fmt.Fprintf(&b, "%s\n%s", tmpl.ListTitle, lipglossList(styles.Primary, data.List))
+		fmt.Fprintf(&b, "%s\n%s", tmpl.ListTitle, tint.LipglossList(styles.Primary, data.List))
 	}
 
 	return b.String()
