@@ -9,10 +9,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/polymorcodeus/book/internal/theme"
-	"github.com/polymorcodeus/book/pkg/book"
-	"github.com/polymorcodeus/book/pkg/catalog"
-	"github.com/polymorcodeus/book/pkg/web"
+	"go.fuzzyporpoise.dev/book/internal/theme"
+	"go.fuzzyporpoise.dev/book/pkg/book"
+	"go.fuzzyporpoise.dev/book/pkg/catalog"
+	"go.fuzzyporpoise.dev/book/pkg/web"
 )
 
 func testConfig(t *testing.T) *theme.UIConfig {

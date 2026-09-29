@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/polymorcodeus/book/pkg/book"
-	"github.com/polymorcodeus/book/pkg/catalog"
+	"go.fuzzyporpoise.dev/book/pkg/book"
+	"go.fuzzyporpoise.dev/book/pkg/catalog"
 )
 
 // Example demonstrates the library round trip an external consumer performs:

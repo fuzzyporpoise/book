@@ -6,7 +6,7 @@ import (
 	"maps"
 	"os"
 
-	"github.com/polymorcodeus/book/pkg/book"
+	"go.fuzzyporpoise.dev/book/pkg/book"
 )
 
 const errorBullet string = "󰯷" // "nf-md-alpha_e_box_outline

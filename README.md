@@ -33,7 +33,7 @@ book mark list --shelf dev --collection tools --format json
 Build from source:
 
 ```bash
-go install github.com/polymorcodeus/book@latest
+go install go.fuzzyporpoise.dev/book@latest
 ```
 
 Or clone and build:
@@ -212,9 +212,9 @@ The domain model and storage layer are importable Go packages, fully decoupled f
 
 | Package | What it provides |
 | --- | --- |
-| `github.com/polymorcodeus/book/pkg/book` | Domain types (`Shelf`, `Collection`, `Mark`) and pure logic: constructors, validation, tag parsing, soft delete, merge reconciliation |
-| `github.com/polymorcodeus/book/pkg/catalog` | TOML persistence (`LoadShelves`, `UpdateShelfFile`, atomic writes), schema migration, and the derived SQLite search index |
-| `github.com/polymorcodeus/book/pkg/web` | Page-title fetching (`WebsiteTitle`) and browser opening (`OpenURL`) |
+| `go.fuzzyporpoise.dev/book/pkg/book` | Domain types (`Shelf`, `Collection`, `Mark`) and pure logic: constructors, validation, tag parsing, soft delete, merge reconciliation |
+| `go.fuzzyporpoise.dev/book/pkg/catalog` | TOML persistence (`LoadShelves`, `UpdateShelfFile`, atomic writes), schema migration, and the derived SQLite search index |
+| `go.fuzzyporpoise.dev/book/pkg/web` | Page-title fetching (`WebsiteTitle`) and browser opening (`OpenURL`) |
 
 ```go
 paths := catalog.Paths{ShelfRoot: "/path/to/shelf.d", CatalogFormat: "toml"}

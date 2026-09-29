@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/BurntSushi/toml"
-	"github.com/polymorcodeus/book/pkg/book"
+	"go.fuzzyporpoise.dev/book/pkg/book"
 )
 
 // fixtureTOML matches the real archive.toml format: nested map tables for

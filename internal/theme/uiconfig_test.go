@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/polymorcodeus/book/pkg/book"
+	"go.fuzzyporpoise.dev/book/pkg/book"
 )
 
 func TestUIConfigStyledError(t *testing.T) {

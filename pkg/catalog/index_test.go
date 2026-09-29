@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/polymorcodeus/book/pkg/book"
+	"go.fuzzyporpoise.dev/book/pkg/book"
 )
 
 func testPaths(t *testing.T) Paths {

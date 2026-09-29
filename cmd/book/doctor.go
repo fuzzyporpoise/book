@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/polymorcodeus/book/pkg/book"
-	"github.com/polymorcodeus/book/pkg/catalog"
+	"go.fuzzyporpoise.dev/book/pkg/book"
+	"go.fuzzyporpoise.dev/book/pkg/catalog"
 )
 
 // doctor inspects the catalog for post-merge problems: duplicate marks, schema

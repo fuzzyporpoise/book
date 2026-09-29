@@ -8,9 +8,9 @@ import (
 
 	"github.com/BurntSushi/toml"
 
-	"github.com/polymorcodeus/book/internal/theme"
-	"github.com/polymorcodeus/book/pkg/book"
-	"github.com/polymorcodeus/book/pkg/catalog"
+	"go.fuzzyporpoise.dev/book/internal/theme"
+	"go.fuzzyporpoise.dev/book/pkg/book"
+	"go.fuzzyporpoise.dev/book/pkg/catalog"
 )
 
 // dumpDefaults serialises the built-in theme or template defaults as indented JSON.

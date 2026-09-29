@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/BurntSushi/toml"
-	"github.com/polymorcodeus/book/pkg/book"
+	"go.fuzzyporpoise.dev/book/pkg/book"
 )
 
 // MigrateReport summarizes the result of a MigrateShelfDir run.
