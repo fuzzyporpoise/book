@@ -40,8 +40,7 @@ pkg/web/
 └── web.go           # OpenURL, WebsiteTitle
 
 internal/theme/
-├── theme.go         # Theme loading from JSON, color/style resolution, huh theme generation
-└── uiconfig.go      # UIConfig (embeds *book.Config + Theme/Templates), StyledError
+└── uiconfig.go      # UIConfig (embeds *book.Config + tint.Theme/Templates), StyledError
 
 internal/model/
 ├── tea.go           # Shared TUI types: Styles, Book, RootScreen, errMsg
@@ -55,7 +54,7 @@ internal/model/
 | `pkg/book` | stdlib + `toml` | `pkg/catalog`, `pkg/web`, `internal/*` |
 | `pkg/catalog` | `pkg/book`, `toml`, `modernc.org/sqlite` | `pkg/web`, `internal/*` |
 | `pkg/web` | `goquery` | `pkg/book`, `pkg/catalog`, `internal/*` |
-| `internal/theme` | `pkg/book`, `huh`, `lipgloss`, `json` | `pkg/catalog`, `internal/model` |
+| `internal/theme` | `pkg/book`, `tint`, `huh`, `lipgloss`, `json` | `pkg/catalog`, `internal/model` |
 | `internal/model` | `pkg/book`, `pkg/catalog`, `internal/theme`, `pkg/web`, `huh`, `lipgloss`, `bubbletea` | — |
 | `cmd` | everything | — |
 
@@ -94,7 +93,7 @@ Config resolution order is fixed: **CLI flags > env vars > TOML config > default
 
 ### Theming
 
-All styling goes through `internal/theme/theme.go`. Never hardcode colors or lipgloss styles outside of the theme package. The `Styles` struct in `internal/model/tea.go` is the single source of truth for TUI rendering.
+All styling goes through the external `tint` package (`go.fuzzyporpoise.dev/tint`) and `internal/theme.UIConfig`, which loads `theme.json` over tint's defaults. Never hardcode colors or lipgloss styles outside of the theme package. The `Styles` struct in `internal/model/tea.go` is the single source of truth for TUI rendering.
 
 ## Code Quality
 

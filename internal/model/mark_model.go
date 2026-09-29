@@ -13,6 +13,7 @@ import (
 	"go.fuzzyporpoise.dev/book/pkg/book"
 	"go.fuzzyporpoise.dev/book/pkg/catalog"
 	"go.fuzzyporpoise.dev/book/pkg/web"
+	"go.fuzzyporpoise.dev/tint"
 )
 
 type markModel struct {
@@ -199,7 +200,7 @@ func (m getMarkModel) View() tea.View {
 				displayCollection = m.get.collection.Name
 
 				if m.get.verifyMark() {
-					displayMark = m.get.mark.Title + "\n\n" + m.get.mark.URL + "\n\n" + lipglossList(s.None, m.get.mark.Tags) + "\n"
+					displayMark = m.get.mark.Title + "\n\n" + m.get.mark.URL + "\n\n" + tint.LipglossList(s.None, m.get.mark.Tags) + "\n"
 				}
 			}
 		}
@@ -448,7 +449,7 @@ func (m editMarkModel) View() tea.View {
 		currentCollection = s.StatusHeader.Render("Picked Collection") + "\n" + m.editor.mark.Collection.Name + "\n\n"
 
 		currentMark = s.StatusHeader.Render("Editing Mark") + "\n" + m.editor.mark.Title
-		currentMark += "\n\n" + m.editor.mark.URL + "\n\n" + lipglossList(s.None, m.editor.mark.Tags) + "\n"
+		currentMark += "\n\n" + m.editor.mark.URL + "\n\n" + tint.LipglossList(s.None, m.editor.mark.Tags) + "\n"
 
 		status = m.editor.book.statusPanel(form, currentShelf+currentCollection+currentMark, 28)
 	}

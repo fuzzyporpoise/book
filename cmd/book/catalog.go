@@ -11,6 +11,7 @@ import (
 	"go.fuzzyporpoise.dev/book/internal/theme"
 	"go.fuzzyporpoise.dev/book/pkg/book"
 	"go.fuzzyporpoise.dev/book/pkg/catalog"
+	"go.fuzzyporpoise.dev/tint"
 )
 
 // dumpDefaults serialises the built-in theme or template defaults as indented JSON.
@@ -29,7 +30,7 @@ func dumpDefaults(config *book.Config, dump string) (err error) {
 		}
 		tmpPath = writePath + ".tmp"
 
-		if jsonData, err = json.MarshalIndent(theme.DefaultThemeConfig(), "", "  "); err != nil {
+		if jsonData, err = json.MarshalIndent(tint.DefaultThemeConfig(), "", "  "); err != nil {
 			return err
 		}
 	case "template":

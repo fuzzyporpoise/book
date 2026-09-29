@@ -7,12 +7,13 @@ import (
 
 	"go.fuzzyporpoise.dev/book/internal/theme"
 	"go.fuzzyporpoise.dev/book/pkg/book"
+	"go.fuzzyporpoise.dev/tint"
 )
 
 func testUIConfig() *theme.UIConfig {
 	cfg := &theme.UIConfig{
 		Config:    &book.Config{Interactive: true},
-		Theme:     theme.NewTheme(nil),
+		Theme:     tint.NewTheme(nil),
 		Templates: make(map[string]book.ViewTemplate),
 	}
 	maps.Copy(cfg.Templates, book.DefaultViewTemplates)
