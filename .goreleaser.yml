@@ -78,7 +78,7 @@ changelog:
 # GitHub release configuration
 release:
   github:
-    owner: polymorcodeus
+    owner: fuzzyporpoise
     name: book
   draft: false
   prerelease: auto
@@ -92,7 +92,7 @@ release:
 
     ```bash
     # Quick install
-    curl -sSL https://raw.githubusercontent.com/polymorcodeus/book/main/install.sh | bash
+    curl -sSL https://raw.githubusercontent.com/fuzzyporpoise/book/main/install.sh | bash
 
     # Homebrew
     # not yet supported
@@ -105,6 +105,6 @@ release:
 
   footer: |
     ---
-    **Full Changelog**: https://github.com/polymorcodeus/book/compare/{{.PreviousTag}}...{{.Tag}}
+    **Full Changelog**: https://github.com/fuzzyporpoise/book/compare/{{.PreviousTag}}...{{.Tag}}
 
 # Homebrew tap
