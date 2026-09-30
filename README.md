@@ -6,12 +6,12 @@
 
 # book
 
-[![Go Version](https://img.shields.io/github/go-mod/go-version/polymorcodeus/book)](https://go.dev/) [![License](https://img.shields.io/github/license/polymorcodeus/book)](./LICENSE) [![Build Status](https://img.shields.io/github/actions/workflow/status/polymorcodeus/book/ci.yml?branch=main)](https://github.com/polymorcodeus/book/actions)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/fuzzyporpoise/book)](https://go.dev/) [![License](https://img.shields.io/github/license/fuzzyporpoise/book)](./LICENSE) [![Build Status](https://img.shields.io/github/actions/workflow/status/fuzzyporpoise/book/ci.yml?branch=main)](https://github.com/fuzzyporpoise/book/actions)
 
 
 **TUI bookmark manager for your terminal.**
 
-Terminal bookmark manager with hierarchical organization (Shelf → Collection → Mark). Bookmarks are persisted as plain TOML, enabling version control, clean diffs, and [dotfile manager](https://github.com/polymorcodeus/lnk) integration. Supports both interactive TUI and non-interactive CLI modes for scripting.
+Terminal bookmark manager with hierarchical organization (Shelf → Collection → Mark). Bookmarks are persisted as plain TOML, enabling version control, clean diffs, and [dotfile manager](https://github.com/fuzzyporpoise/lnk) integration. Supports both interactive TUI and non-interactive CLI modes for scripting.
 
 Bookmarks ship with stable identifiers (`catalog_id`), full-text search (`book mark search`), atomic writes, schema migration (`book migrate`), and soft-delete recovery (`book mark restore`, `book gc`).
 
@@ -39,7 +39,7 @@ go install go.fuzzyporpoise.dev/book@latest
 Or clone and build:
 
 ```bash
-git clone https://github.com/polymorcodeus/book.git
+git clone https://github.com/fuzzyporpoise/book.git
 cd book
 go build .
 ```

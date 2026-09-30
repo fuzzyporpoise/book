@@ -13,7 +13,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # GitHub repository
-REPO="polymorcodeus/book"
+REPO="fuzzyporpoise/book"
 INSTALL_DIR="/usr/local/bin"
 BINARY_NAME="book"
 
@@ -160,9 +160,9 @@ if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
     echo "book installer script"
     echo ""
     echo "Usage:"
-    echo "  curl -sSL https://raw.githubusercontent.com/polymorcodeus/book/main/install.sh | bash"
-    echo "  curl -sSL https://raw.githubusercontent.com/polymorcodeus/book/main/install.sh | bash -s v0.0.1"
-    echo "  BOOK_VERSION=v0.0.1 curl -sSL https://raw.githubusercontent.com/polymorcodeus/book/main/install.sh | bash"
+    echo "  curl -sSL https://raw.githubusercontent.com/fuzzyporpoise/book/main/install.sh | bash"
+    echo "  curl -sSL https://raw.githubusercontent.com/fuzzyporpoise/book/main/install.sh | bash -s v0.0.1"
+    echo "  BOOK_VERSION=v0.0.1 curl -sSL https://raw.githubusercontent.com/fuzzyporpoise/book/main/install.sh | bash"
     echo ""
     echo "This script will:"
     echo "  1. Detect your OS and architecture"
@@ -172,7 +172,7 @@ if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
     echo "Environment variables:"
     echo "  BOOK_VERSION - Specify version to install (e.g., v0.0.1)"
     echo ""
-    echo "Manual installation: https://github.com/polymorcodeus/book/releases"
+    echo "Manual installation: https://github.com/fuzzyporpoise/book/releases"
     exit 0
 fi
 
