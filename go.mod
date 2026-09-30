@@ -10,7 +10,7 @@ require (
 	github.com/PuerkitoBio/goquery v1.13.0
 	github.com/urfave/cli-altsrc/v3 v3.1.0
 	github.com/urfave/cli-validation v0.0.0-20230629031421-92802a7fd6e9
-	github.com/urfave/cli/v3 v3.11.0
+	github.com/urfave/cli/v3 v3.13.0
 	go.fuzzyporpoise.dev/gofiglet v0.4.0
 	go.fuzzyporpoise.dev/tint v0.3.0
 	modernc.org/sqlite v1.59.0
