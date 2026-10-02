@@ -38,12 +38,22 @@ func OpenURL(url string) error {
 // WebsiteTitle fetches and extracts the page title from a URL. The request is
 // bound to ctx and capped at 10 seconds.
 func WebsiteTitle(ctx context.Context, url string) (string, error) {
+	return WebsiteTitleWithClient(ctx, nil, url)
+}
+
+// WebsiteTitleWithClient is WebsiteTitle with a caller-supplied HTTP client,
+// letting daemons and library consumers control the transport, timeout, retry
+// policy, and cookie jar. A nil client falls back to the default 10-second
+// client. The request remains bound to ctx for cancellation.
+func WebsiteTitleWithClient(ctx context.Context, client *http.Client, url string) (string, error) {
+	if client == nil {
+		client = &http.Client{Timeout: 10 * time.Second}
+	}
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
 		return "", fmt.Errorf("create request: %w", err)
 	}
 
-	client := &http.Client{Timeout: 10 * time.Second}
 	res, err := client.Do(req)
 	if err != nil {
 		return "", err

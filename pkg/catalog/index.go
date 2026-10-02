@@ -70,10 +70,14 @@ type Index struct {
 	path string
 }
 
-// IndexPath returns the on-disk location of the derived index. It prefers the
-// user cache dir ($XDG_CACHE_HOME/book/index.db), falling back to a file next
-// to the shelf directory when the cache dir is unavailable.
+// IndexPath returns the on-disk location of the derived index. An explicit
+// Paths.IndexPath wins; otherwise it prefers the user cache dir
+// ($XDG_CACHE_HOME/book/index.db), falling back to a file next to the shelf
+// directory when the cache dir is unavailable.
 func IndexPath(paths Paths) string {
+	if paths.IndexPath != "" {
+		return paths.IndexPath
+	}
 	if cache := os.Getenv("XDG_CACHE_HOME"); cache != "" {
 		return filepath.Join(cache, "book", "index.db")
 	}
@@ -88,9 +92,10 @@ func OpenIndex(paths Paths) (*Index, error) {
 		return nil, fmt.Errorf("create index directory: %w", err)
 	}
 
-	// When falling back to the config dir (which may be git-committed), make
-	// sure the disposable index never gets committed.
-	if os.Getenv("XDG_CACHE_HOME") == "" {
+	// When the index lands next to the shelf directory by default (which may
+	// be git-committed), make sure the disposable index never gets committed.
+	// An explicit Paths.IndexPath is caller-managed and left alone.
+	if paths.IndexPath == "" && os.Getenv("XDG_CACHE_HOME") == "" {
 		ensureIndexGitignore(filepath.Dir(path))
 	}
 
@@ -345,11 +350,18 @@ func (ix *Index) CollectionNames(shelfName string) ([]string, error) {
 
 // Collection returns a reconstructed collection (with marks and tags) for the
 // named shelf and collection. Soft-deleted marks are excluded. The returned
-// collection and its marks have their Shelf and Collection back-pointers wired,
-// matching the BookShelves finders.
+// collection and its marks have their Shelf and Collection back-pointers wired
+// to a shelf fully populated from its index row (ID, Name, Description,
+// timestamps, FilePath). Two finder differences remain: SchemaVersion is not
+// tracked by the index, and shelf.Collections contains only the returned
+// collection rather than every collection on the shelf.
 func (ix *Index) Collection(shelfName, collectionName string) (*book.Collection, error) {
-	var shelfID string
-	err := ix.db.QueryRow(`SELECT shelf_id FROM shelves WHERE name = ?`, shelfName).Scan(&shelfID)
+	shelf := &book.Shelf{}
+	err := ix.db.QueryRow(`
+		SELECT shelf_id, name, description, created_at, updated_at, file_path
+		FROM shelves
+		WHERE name = ?`, shelfName).
+		Scan(&shelf.ID, &shelf.Name, &shelf.Description, &shelf.CreatedAt, &shelf.UpdatedAt, &shelf.FilePath)
 	if err == sql.ErrNoRows {
 		return nil, fmt.Errorf("shelf %q not found", shelfName)
 	}
@@ -357,12 +369,11 @@ func (ix *Index) Collection(shelfName, collectionName string) (*book.Collection,
 		return nil, err
 	}
 
-	shelf := &book.Shelf{ID: shelfID, Name: shelfName}
 	col := &book.Collection{Shelf: shelf}
 	err = ix.db.QueryRow(`
 		SELECT collection_id, name, description, created_at, updated_at
 		FROM collections
-		WHERE shelf_id = ? AND name = ?`, shelfID, collectionName).
+		WHERE shelf_id = ? AND name = ?`, shelf.ID, collectionName).
 		Scan(&col.ID, &col.Name, &col.Description, &col.CreatedAt, &col.UpdatedAt)
 	if err == sql.ErrNoRows {
 		return nil, fmt.Errorf("collection %q not found in shelf %q", collectionName, shelfName)
@@ -370,6 +381,7 @@ func (ix *Index) Collection(shelfName, collectionName string) (*book.Collection,
 	if err != nil {
 		return nil, err
 	}
+	shelf.AddCollection(col)
 
 	rows, err := ix.db.Query(`
 		SELECT catalog_id, title, url, created_at, updated_at, deleted_at

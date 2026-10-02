@@ -89,6 +89,9 @@ func (m *markModel) updateShelfFileCmd(action string) tea.Cmd {
 	return func() tea.Msg {
 		switch action {
 		case "add":
+			if err := m.book.shelves.VerifyUniqueURL(m.mark.ID, nil); err != nil {
+				return errMsg{err}
+			}
 			m.mark.RecordAdd()
 			m.mark.Collection.AddMark(m.mark)
 		case "edit":

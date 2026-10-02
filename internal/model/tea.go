@@ -73,6 +73,10 @@ func NewStyles(config *theme.UIConfig) *Styles {
 
 type errMsg struct{ error }
 
+// Unwrap exposes the embedded error so callers can match sentinels with
+// errors.Is on the terminal error returned by Error().
+func (e errMsg) Unwrap() error { return e.error }
+
 type shelfSavedMsg struct{}
 
 // handleCommonKeys routes shared navigation keys for all TUI forms. It returns

@@ -228,7 +228,13 @@ func addMark(ctx context.Context, bs *book.BookShelves, URL string, tags string,
 		return nil
 	}
 
-	return runProgram(markRootScreen(bs, &mark, "add", config))
+	if err := runProgram(markRootScreen(bs, &mark, "add", config)); err != nil {
+		if errors.Is(err, book.ErrDuplicateURL) || errors.Is(err, book.ErrURLTrashed) {
+			return uniqueURLError(bs, mark.ID, err)
+		}
+		return err
+	}
+	return nil
 }
 
 func removeMark(bs *book.BookShelves, id string, confirmed bool, config *theme.UIConfig) error {
