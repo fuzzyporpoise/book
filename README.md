@@ -214,7 +214,7 @@ The domain model and storage layer are importable Go packages, fully decoupled f
 | --- | --- |
 | `go.fuzzyporpoise.dev/book/pkg/book` | Domain types (`Shelf`, `Collection`, `Mark`) and pure logic: constructors, validation, tag parsing, soft delete, merge reconciliation |
 | `go.fuzzyporpoise.dev/book/pkg/catalog` | TOML persistence (`LoadShelves`, `UpdateShelfFile`, atomic writes), schema migration, and the derived SQLite search index |
-| `go.fuzzyporpoise.dev/book/pkg/web` | Page-title fetching (`WebsiteTitle`) and browser opening (`OpenURL`) |
+| `go.fuzzyporpoise.dev/book/pkg/web` | Page-title fetching (`WebsiteTitle`, or `WebsiteTitleWithClient` to supply your own `http.Client`) and browser opening (`OpenURL`) |
 
 ```go
 paths := catalog.Paths{ShelfRoot: "/path/to/shelf.d", CatalogFormat: "toml"}
@@ -240,7 +240,7 @@ if err := catalog.LoadShelves(&shelves, paths); err != nil {
 }
 ```
 
-Storage entry points take a narrow `catalog.Paths` (shelf directory, file format) rather than the CLI's configuration struct, so library consumers never touch flag, theme, or TUI concerns. A runnable version of this round trip lives in `pkg/book/example_test.go`.
+Storage entry points take a narrow `catalog.Paths` (shelf directory, file format, optional config-file exclusion, optional `IndexPath` override for the derived index location) rather than the CLI's configuration struct, so library consumers never touch flag, theme, or TUI concerns. A runnable version of this round trip lives in `pkg/book/example_test.go`.
 
 Notes:
 
