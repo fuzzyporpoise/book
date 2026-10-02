@@ -128,6 +128,92 @@ func TestCollectionNotFound(t *testing.T) {
 	}
 }
 
+func TestIndexPathOverride(t *testing.T) {
+	paths := testPaths(t)
+
+	dir := t.TempDir()
+	paths.IndexPath = filepath.Join(dir, "custom", "my-index.db")
+
+	if got := IndexPath(paths); got != paths.IndexPath {
+		t.Fatalf("IndexPath = %q, want override %q", got, paths.IndexPath)
+	}
+
+	ix, err := OpenIndex(paths)
+	if err != nil {
+		t.Fatalf("OpenIndex: %v", err)
+	}
+	defer func() { _ = ix.Close() }()
+
+	if _, err := os.Stat(paths.IndexPath); err != nil {
+		t.Fatalf("index not created at override path: %v", err)
+	}
+	if _, err := os.Stat(filepath.Join(filepath.Dir(paths.IndexPath), ".gitignore")); !os.IsNotExist(err) {
+		t.Errorf("caller-managed index location should not get a .gitignore, stat err = %v", err)
+	}
+
+	s := sampleShelf()
+	writeShelfFile(t, paths, s)
+	if _, err := ix.Sync(paths); err != nil {
+		t.Fatalf("Sync: %v", err)
+	}
+	names, err := ix.ShelfNames()
+	if err != nil {
+		t.Fatalf("ShelfNames: %v", err)
+	}
+	if len(names) != 1 || names[0] != "work" {
+		t.Fatalf("ShelfNames = %v, want [work]", names)
+	}
+}
+
+func TestCollectionPopulatesShelfBackPointers(t *testing.T) {
+	paths := testPaths(t)
+	ix, err := OpenIndex(paths)
+	if err != nil {
+		t.Fatalf("OpenIndex: %v", err)
+	}
+	defer func() { _ = ix.Close() }()
+
+	s := sampleShelf()
+	s.CreatedAt = "2026-01-01T00:00:00Z"
+	s.UpdatedAt = "2026-01-02T00:00:00Z"
+	writeShelfFile(t, paths, s)
+	if err := ix.UpsertShelf(s); err != nil {
+		t.Fatalf("UpsertShelf: %v", err)
+	}
+
+	col, err := ix.Collection("work", "golang")
+	if err != nil {
+		t.Fatalf("Collection: %v", err)
+	}
+
+	shelf := col.Shelf
+	if shelf == nil {
+		t.Fatal("Collection returned a collection with no shelf back-pointer")
+	}
+	if shelf.ID != s.ID || shelf.Name != s.Name || shelf.Description != s.Description {
+		t.Errorf("shelf = {ID:%q Name:%q Description:%q}, want {%q %q %q}",
+			shelf.ID, shelf.Name, shelf.Description, s.ID, s.Name, s.Description)
+	}
+	if shelf.CreatedAt != s.CreatedAt || shelf.UpdatedAt != s.UpdatedAt {
+		t.Errorf("shelf timestamps = %q/%q, want %q/%q",
+			shelf.CreatedAt, shelf.UpdatedAt, s.CreatedAt, s.UpdatedAt)
+	}
+	if shelf.FilePath != s.FilePath {
+		t.Errorf("shelf FilePath = %q, want %q", shelf.FilePath, s.FilePath)
+	}
+	if shelf.Collection("golang") != col {
+		t.Error("shelf.Collections does not contain the returned collection")
+	}
+	for _, m := range col.Marks {
+		if m.Shelf != shelf {
+			t.Errorf("mark %q shelf back-pointer not wired to the returned shelf", m.ID)
+		}
+		if m.Collection != col {
+			t.Errorf("mark %q collection back-pointer not wired to the returned collection", m.ID)
+		}
+	}
+}
+
 func TestRebuildFromDisk(t *testing.T) {
 	paths := testPaths(t)
 	writeShelfFile(t, paths, sampleShelf())

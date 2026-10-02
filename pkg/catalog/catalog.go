@@ -25,6 +25,10 @@ type Paths struct {
 	// ConfigFile is an optional path to exclude from shelf globs, for when a
 	// config file lives inside ShelfRoot. Empty disables the exclusion.
 	ConfigFile string
+	// IndexPath is an optional explicit location for the derived SQLite index
+	// database file. Empty resolves via $XDG_CACHE_HOME, then a file next to
+	// the shelf directory (see the IndexPath function).
+	IndexPath string
 }
 
 // PathsFromConfig derives storage Paths from application configuration.
